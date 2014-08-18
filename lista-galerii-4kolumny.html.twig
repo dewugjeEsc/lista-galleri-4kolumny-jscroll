@@ -1,0 +1,50 @@
+{% extends "VelaCmsWidgetBundle:Widgets:velacms_widget.base.html.twig" %}
+
+{% block widgetContent %}
+
+{% if widget.getSortingEnabled %}
+{% include 'VelaCmsWidgetBundle:Order:order.html.twig' with {orders:orders} %}
+{% endif %}
+<div class="row galleries-list">
+  <div class="col-lg-12">
+      <div class="row">
+        {% for item in items %}
+        {%  set listItem = item.getListItem %}
+        <div class="col-lg-3 gallery-item">
+        <div class="wraper">
+          <a href="{{ velacms_url_get(item.getListItem.getPageId) }}" class="img">
+            <img src="{{ velacms_get_media_file_image(listItem.getMedia) | imagine_filter('lista_galeri_miniatura')  }}" alt="">
+          </a>
+            <a href="{{ velacms_url_get(item.getListItem.getPageId) }}" class="description"> {{ velacms_text_trim(item.getPage.getTitle,7)|raw }} </a>
+          </div>
+        </div>
+	
+        {% else %}
+        <li>
+          <h1>brak elementów do wyświetlenia</h1>
+        </li>
+        {% endfor %}
+		    {% if widget.getPaginationEnabled %}
+
+       
+                      {{ knp_pagination_render(items,'VelaCmsSolutionGoprKrynicaBundle:Pager:pager.html.twig')|raw }}
+ 
+              
+{% endif %}
+      </div>
+
+                </div></div>
+<!-- <div class="navigation">
+
+
+</div> -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		//$(".fancybox").fancybox();
+		if ($('.pagination').length){
+        $('.galleries-list .row').addClass('row jscroll');
+    }
+	});
+</script>
+{% endblock %}

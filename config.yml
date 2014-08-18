@@ -1,0 +1,6 @@
+
+        lista_galeri_miniatura:
+            quality: 100
+            filters:
+                 relative_resize: { heighten: 185 }
+                 thumbnail: { size: [270, 185], mode: outbound }
